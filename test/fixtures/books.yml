@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  product_video: MyString
+  pur_in_price: 9.99
+  quantity_in_stock: 1
+  sell_price: 9.99
+  type: one
+  status: one
+  image: MyString
+
+two:
+  name: MyString
+  description: MyText
+  product_video: MyString
+  pur_in_price: 9.99
+  quantity_in_stock: 1
+  sell_price: 9.99
+  type: two
+  status: two
+  image: MyString
