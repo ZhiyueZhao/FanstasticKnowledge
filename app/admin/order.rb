@@ -3,6 +3,8 @@ ActiveAdmin.register Order do
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
 permit_params :to_city, :to_address, :to_post_code, :shipping_fee, :user_id, :province_id
+
+menu :priority => 2
 #
 # or
 #

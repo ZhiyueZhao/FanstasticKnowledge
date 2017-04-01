@@ -4,4 +4,6 @@ class Book < ApplicationRecord
   has_many :authorBooks
   has_many :custReviews
   has_many :lineItems
+
+  mount_uploader :image, ImageUploader
 end

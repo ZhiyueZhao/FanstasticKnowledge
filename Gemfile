@@ -61,3 +61,4 @@ gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
 gem 'devise'
 
 gem 'carrierwave', '~> 1.0'
+gem "mini_magick"
