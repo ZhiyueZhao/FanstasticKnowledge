@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  #root ''
+  resources :books
+
+  root to: 'books#index'
 
   get 'cust', :to => 'access#menu'
   get 'access/menu'

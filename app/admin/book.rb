@@ -28,16 +28,6 @@ ActiveAdmin.register Book do
       end
     end
     a truncate(book.name), :href => admin_book_path(book)
-    # br
-    # a :href => admin_book_path(book) do
-    #   "Quantity: ", book.quantity_in_stock
-    # end
-    #
-    # ul do
-    #   li "Quantity: "    book.quantity_in_stock
-    #   li "Purch Price:"  book.pur_in_price
-    #   li "Sell Price:"   number_to_currency book.sell_price
-    # end
   end
 
   # index as: :block do |book|

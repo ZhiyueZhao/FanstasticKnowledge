@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+  .books
+    .book
+      h4 
+        = book.name[0..30].gsub(/\s\w+\s*$/, '...')
+      - if book.image.present?
+        = link_to image_tag book.image_url(:thumb), {action: 'show', controller: 'booke_controller'}
+      p
+        strong Price:
+        = number_to_currency book.sell_price
+        
+      - if full_details
+        p = book.description
+      - else
+        p = link_to 'details', book
