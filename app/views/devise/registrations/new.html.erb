@@ -4,8 +4,43 @@
   <%= devise_error_messages! %>
 
   <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name%>
+  </div>
+
+  <div class="field">
+    <%= f.label :province_id %><br />
+    <%= f.select(:province_id, options_from_collection_for_select(@provinces, "id", "name", 0), :include_blank => true)%>
+  </div>
+
+  <div class="field">
+    <%= f.label :city %><br />
+    <%= f.text_field :city%>
+  </div>
+
+  <div class="field">
+    <%= f.label :address %><br />
+    <%= f.text_field :address%>
+  </div>
+
+  <div class="field">
+    <%= f.label :post_code %><br />
+    <%= f.text_field :post_code%>
+  </div>
+
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.telephone_field :phone_number%>
+  </div>
+
+  <div class="field">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.email_field :email%>
   </div>
 
   <div class="field">

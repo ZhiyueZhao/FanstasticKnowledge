@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  belongs_to :province
-  has_many :custReviews
-  has_many :orders
-  has_many :custReviews
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
 end
