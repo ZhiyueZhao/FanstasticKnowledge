@@ -1,5 +1,22 @@
-h1 one Book
+doctype html
+html
+  head
+      h1 
+        = @book.name
 
-= render partial: 'book', collection: @books, locals:{full_details:true}
-
-p = link_to 'home',root_path
+      = image_tag @book.image_url(:thumb)
+      #product-description
+        - if !@book.description.nil?
+          = @book.description
+        - else
+          p
+            em No Description
+        p
+          strong Price:
+          = number_to_currency @book.sell_price
+          = link_to "Add to Card", add_to_cart_path(@book.id)
+        p
+          strong By:
+          = @book.authorBooks.first.author.first_name
+        p = link_to "Back to All Books", books_path
+      div style="clear:both;" 

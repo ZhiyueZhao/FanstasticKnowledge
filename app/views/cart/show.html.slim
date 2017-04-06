@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    h1 Your Cart
+    - unless @cart.lineItems.any?
+      p
+        You don't have any items in your cart. link_to "Go Add Some", books_path
+        
+    table width="100%" 
+      tr
+        th Book
+        th Price
+      - for lineItem in @cart.lineItems
+        tr
+          td = lineItem.book.name
+          td = number_to_currency lineItem.price
+          td = link_to "Remove", remove_from_cart_path(lineItem), :method => :post
+      tr
+        td Total:
+        td = number_to_currency @cart.total_price
+    hr/
+    = form_tag checkout_path, :style => "text-align: right" do |f|
+      = link_to "Continue Shopping", root_path
+      or
+      = submit_tag "Checkout Now!"

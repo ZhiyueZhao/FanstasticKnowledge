@@ -2,7 +2,7 @@ class RegistrationsController < Devise::RegistrationsController
   def new
     @provinces = Province.all
   end
-  
+
   def resource_name
     :user
   end
@@ -10,6 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
   def resource
     @user ||= User.new
   end
+  
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:user]
   end
