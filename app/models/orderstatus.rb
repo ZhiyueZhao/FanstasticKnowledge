@@ -1,0 +1,2 @@
+class Orderstatus < ApplicationRecord
+end
