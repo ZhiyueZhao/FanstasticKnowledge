@@ -14,7 +14,7 @@ class CartController < ApplicationController
   end
 
   def remove
-    item = @cart.line_items.find(params[:id])
+    item = @cart.lineItems.find(params[:id])
     item.destroy
     @cart.recalculate_price!
     flash[:notice] = "Item removed from cart"
