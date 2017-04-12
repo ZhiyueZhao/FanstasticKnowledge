@@ -7,9 +7,20 @@ html
         = book.name[0..30].gsub(/\s\w+\s*$/, '...')
       - if book.image.present?
         = link_to image_tag book.image_url(:thumb), {action: 'show', controller: 'booke_controller'}
-      p
-        strong Price:
-        = number_to_currency book.sell_price
+        
+      - if book.status.des_percentage > 0
+        p
+          strong Regular Price:
+          = number_to_currency book.sell_price
+          
+        p
+          strong 
+            = book.status.name
+          = number_to_currency (book.sell_price * (1 - book.status.des_percentage))
+      - else
+        p
+          strong Price:
+          = number_to_currency book.sell_price
         
       - if full_details
         p = book.description

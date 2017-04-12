@@ -8,5 +8,6 @@ class Book < ApplicationRecord
   mount_uploader :image, ImageUploader
 
   scope :search_by_name, lambda {|query|where(['"books"."name" LIKE ?', "%#{query}%"])}
-  scope :search_by_type, lambda {|query|where(["type_id = ?", "#{query}"])}
+  scope :search_by_type, lambda {|query|where(["type_id LIKE ?", "%#{query}%"])}
+  scope :search_by_status, lambda {|query|where(["status_id LIKE ?", "%#{query}%"])}
 end

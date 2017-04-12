@@ -11,9 +11,13 @@ html
         - else
           p
             em No Description
+              
+        p 
+          strong Status:
+          = @book.status.name
         p
           strong Price:
-          = number_to_currency @book.sell_price
+          = number_to_currency @book.sell_price * (1-@book.status.des_percentage)
           = link_to "Add to Card", add_to_cart_path(@book.id)
         p
           strong By:

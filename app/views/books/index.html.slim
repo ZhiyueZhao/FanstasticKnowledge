@@ -6,6 +6,7 @@ div
       
       = text_field_tag :search, params[:search]
       = select_tag :type,  options_from_collection_for_select(@types, "id", "name", @selected_type), :include_blank => true
+      = select_tag :status,  options_from_collection_for_select(@statuses, "id", "name", @selected_status), :include_blank => true
       = submit_tag "Search", :name => nil
 = render partial: 'book', collection: @books, locals:{full_details:false}
 = paginate @books
