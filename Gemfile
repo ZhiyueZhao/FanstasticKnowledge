@@ -65,5 +65,5 @@ gem 'carrierwave', '~> 1.0'
 gem "mini_magick"
 #pageinition
 gem "kaminari"
-#shopping cart
-gem 'acts_as_shopping_cart'
+#check out
+gem 'stripe'

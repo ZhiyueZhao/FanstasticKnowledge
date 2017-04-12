@@ -17,10 +17,12 @@ menu :priority => 2
   show do
     panel "Invoice" do
       table_for(order.lineItems) do |t|
-        t.column("Book") {|item| auto_link item.book        }
+        t.column("Book") {|item| auto_link item.book}
+        t.column("Quantity") {|item| item.quantity }
         t.column("Price")   {|item| number_to_currency item.price }
         tr :class => "odd" do
           td "Total:", :style => "text-align: right;"
+          td
           td number_to_currency(order.total_price)
         end
       end

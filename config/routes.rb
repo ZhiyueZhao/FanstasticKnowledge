@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "cart/add/:id" => "cart#add", :as => :add_to_cart
   post "cart/remove/:id" => "cart#remove", :as => :remove_from_cart
   post "cart/checkout" => "cart#checkout", :as => :checkout
+  post "cart/update/:id" => "cart#update", :as => :line_items_update
 
   devise_for :users, controllers: {registrations: "registrations"}
   resources :books
