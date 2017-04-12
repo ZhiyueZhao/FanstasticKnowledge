@@ -33,6 +33,14 @@ class CartController < ApplicationController
                                     description: 'Rails Stripe customer',
                                     currency:    'cad')
 
+
+
+    if @charge.paid && @charge.amount == amount
+      orderstatus = Orderstatus.where("name = 'Placed'").first
+      @cart.orderstatus_id = orderstatus.id
+      @cart.stripe_charge_id = @charge.id
+    end
+
     @cart.checkout!
     session.delete(:cart_id)
     flash[:notice] = "Thank you for your purchase! We will ship it shortly!"
@@ -45,7 +53,8 @@ class CartController < ApplicationController
   def update
     item = @cart.lineItems.find(params[:id])
     @st = params[:id]
-    item.quantity = params[:line_item][@st]==nil ? 99 : params[:line_item][@st]#added this line here
+    book_inStore = item.book.quantity_in_stock
+    item.quantity = (params[:line_item][@st]).to_i>book_inStore ? book_inStore : params[:line_item][@st]#added this line here
     item.save
     @cart.recalculate_price!
     flash[:notice] = "Item updated!"

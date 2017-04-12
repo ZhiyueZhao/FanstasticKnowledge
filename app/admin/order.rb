@@ -12,7 +12,18 @@ menu :priority => 2
 
   scope :all, :default => true
   scope :in_progress
-  scope :complete
+  scope :placed
+  scope :shipped
+  scope :cancelled
+  scope :completed
+
+  index do
+    column("Order", :sortable => :id) {|order| link_to "##{order.id} ", admin_order_path(order) }
+    column("State")                   {|order| status_tag(Orderstatus.find(order.orderstatus_id.nil? ? 1 : order.orderstatus_id).name) }
+    column("Date", :checked_out_at)
+    column("Customer", :user, :sortable => :user_id)
+    column("Total")                   {|order| number_to_currency order.total_price }
+  end
 
   show do
     panel "Invoice" do
