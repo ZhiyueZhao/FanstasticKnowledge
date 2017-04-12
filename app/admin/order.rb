@@ -39,6 +39,17 @@ menu :priority => 2
       end
     end
   end
+
+  action_item :complete, only: :show do
+    link_to 'Complete Order', complete_admin_order_path(order), method: :put if order.orderstatus_id==2
+  end
+
+  member_action :complete, method: :put do
+    order = Order.find(params[:id])
+    orderstatus = Orderstatus.where("name = 'Completed'").first.id
+    order.update(orderstatus_id: orderstatus)
+    redirect_to admin_order_path(order)
+  end
 #
 # or
 #
