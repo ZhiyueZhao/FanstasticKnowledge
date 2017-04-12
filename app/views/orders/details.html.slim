@@ -1,0 +1,16 @@
+h4 
+  |Orders# 
+  =@order.id
+
+  table#order
+    thead
+      tr
+        th Items
+        th Quantity
+        th Price
+    tbody
+      - @order.lineItems.each do |item|
+        tr
+          td = item.book.name
+          td = item.quantity
+          td = number_to_currency item.price

@@ -1,0 +1,16 @@
+h1 All Orders Placed
+
+table#orders
+  thead
+    tr
+      th Orders
+      th Total
+      th Categorys
+      th Status
+  tbody
+    - @orders.each do |order|
+      tr
+        td = link_to order.id,  :action=>'details', id: order.id
+        td = number_to_currency order.total_price
+        td = order.lineItems.count
+        td = Orderstatus.find(order.orderstatus_id).name

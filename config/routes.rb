@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'orders/details'
+
+  get 'orders/show', :as => :orders
+
   get "cart" => "cart#show"
   get "cart/add/:id" => "cart#add", :as => :add_to_cart
   post "cart/remove/:id" => "cart#remove", :as => :remove_from_cart

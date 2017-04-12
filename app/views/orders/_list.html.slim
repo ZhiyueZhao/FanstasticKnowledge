@@ -1,0 +1,12 @@
+.orders
+
+  h2 = order.name
+  p
+    strong Price:
+    = number_to_currency order.price
+  - if full_details
+    p = order.description
+    - if order.image.present?
+      = image_tag order.image.url
+  - else
+    p = link_to 'details', order
