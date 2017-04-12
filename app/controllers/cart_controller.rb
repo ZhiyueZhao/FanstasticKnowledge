@@ -23,7 +23,7 @@ class CartController < ApplicationController
   end
 
   def checkout
-    amount = (@cart.total_price * 100).to_i # $5 in cents
+    amount = (@cart.total_price * (1+current_user.province.GST+current_user.province.HST+current_user.province.PST) * 100).to_i # $5 in cents
 
     @customer = Stripe::Customer.create(email:  params[:stripeEmail],
                                        source: params[:stripeToken])

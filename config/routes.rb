@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   get 'orders/details'
 
+  get 'books/aboutus', :as => :aboutus
+
   get 'orders/show', :as => :orders
 
   get "cart" => "cart#show"

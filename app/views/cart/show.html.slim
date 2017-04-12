@@ -25,6 +25,22 @@ html
         td Total:
         td
         td = number_to_currency @cart.total_price
+        
+      - if current_user.province.GST != 0
+        tr
+          td GST:
+          td
+          td = number_to_currency @cart.total_price * current_user.province.GST
+      - if current_user.province.PST != 0
+        tr
+          td PST:
+          td
+          td = number_to_currency @cart.total_price * current_user.province.PST
+      - if current_user.province.HST != 0
+        tr
+          td HST:
+          td
+          td = number_to_currency @cart.total_price * current_user.province.HST
     hr/
     = form_tag checkout_path, :style => "text-align: right" do |f|
       article

@@ -22,6 +22,10 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
   end
 
+  def aboutus
+    @about = AboutU.last
+  end
+
   private
 
     def search_type

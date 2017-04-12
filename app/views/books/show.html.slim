@@ -21,6 +21,6 @@ html
           = link_to "Add to Card", add_to_cart_path(@book.id)
         p
           strong By:
-          = @book.authorBooks.first.author.first_name
+          = @book.authorBooks.first.author.full_name  
         p = link_to "Back to All Books", books_path
       div style="clear:both;" 
