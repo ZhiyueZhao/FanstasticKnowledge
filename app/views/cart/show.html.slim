@@ -41,6 +41,10 @@ html
           td HST:
           td
           td = number_to_currency @cart.total_price * current_user.province.HST
+      tr
+        td Sub Total:
+        td
+        td = number_to_currency @cart.total_price * (1+current_user.province.GST+current_user.province.HST+current_user.province.PST)
     hr/
     = form_tag checkout_path, :style => "text-align: right" do |f|
       article
@@ -49,5 +53,5 @@ html
             p = flash[:error]
       = link_to "Continue Shopping", root_path
       or
-      script.stripe-button src="https://checkout.stripe.com/checkout.js" data-amount=(@cart.total_price*100).to_i data-description=@description data-key=Rails.configuration.stripe[:publishable_key] data-locale="auto" 
+      script.stripe-button src="https://checkout.stripe.com/checkout.js" data-amount=(@cart.total_price* (1+current_user.province.GST+current_user.province.HST+current_user.province.PST)*100).to_i data-description=@description data-key=Rails.configuration.stripe[:publishable_key] data-locale="auto" 
  

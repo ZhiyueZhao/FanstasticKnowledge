@@ -5,7 +5,13 @@ class Book < ApplicationRecord
   has_many :custReviews
   has_many :lineItems
 
+  validates :name, presence: true
+  validates_numericality_of :quantity_in_stock, :allow_nil => false, :greater_than_or_equal_to => 1
+  validates_numericality_of :pur_in_price, :allow_nil => false, :greater_than_or_equal_to => 0
+  validates_numericality_of :sell_price, :allow_nil => false, :greater_than_or_equal_to => 0.1
+
   mount_uploader :image, ImageUploader
+
 
   scope :search_by_name, lambda {|query|where(['"books"."name" LIKE ?', "%#{query}%"])}
   scope :search_by_type, lambda {|query|where(["type_id LIKE ?", "%#{query}%"])}
