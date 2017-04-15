@@ -7,7 +7,7 @@ class BooksController < ApplicationController
     @selected_type = params[:type]
     @selected_status = params[:status]
 
-    if (params[:type] == '' || params[:type] == nil) && (params[:status] == '' || params[:status] == nil)
+    if (params[:type] == '' || params[:type].nil?) && (params[:status] == '' || params[:status].nil?)
       @books = Book.search_by_name(params[:search]).page(params[:page]).per(3)
     else
       @books = Book.search_by_name(params[:search]).search_by_type(params[:type])

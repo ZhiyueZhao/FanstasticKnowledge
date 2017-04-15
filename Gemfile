@@ -68,3 +68,5 @@ gem 'kaminari'
 # check out
 gem 'stripe'
 gem 'rubocop'
+# css themes
+gem 'bootstrap-sass'
