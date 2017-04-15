@@ -1,8 +1,7 @@
 class CartController < ApplicationController
-
-  before_action :authenticate_user!
   before_filter :find_cart
-
+  before_action :authenticate_user!
+  
   def add
     @cart.save if @cart.new_record?
     session[:cart_id] = @cart.id

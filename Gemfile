@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+  repo_name = '#{repo_name}/#{repo_name}' unless repo_name.include?('/')
+  'https://github.com/#{repo_name}.git'
 end
 
 
@@ -58,12 +58,13 @@ gem 'slim-rails'
 # These three gems are required for Active Admin
 gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
 gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
-#Flexible authentication solution for Rails with Warden
+# Flexible authentication solution for Rails with Warden
 gem 'devise'
-#ImageUploader
+# ImageUploader
 gem 'carrierwave', '~> 1.0'
-gem "mini_magick"
-#pageinition
-gem "kaminari"
-#check out
+gem 'mini_magick'
+# pageinition
+gem 'kaminari'
+# check out
 gem 'stripe'
+gem 'rubocop'

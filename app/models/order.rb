@@ -4,21 +4,14 @@ class Order < ApplicationRecord
   belongs_to :orderstatus
   has_many :lineItems
 
-  scope :in_progress, ->{where("orders.orderstatus_id = 1")}
-  scope :placed, -> {where("orders.orderstatus_id = 2")}
-  scope :shipped, -> {where("orders.orderstatus_id = 3")}
-  scope :cancelled, -> {where("orders.orderstatus_id = 4")}
-  scope :completed, -> {where("orders.orderstatus_id = 5")}
-
-  def self.find_with_book(book)
-    return [] unless book
-    complete.joins(:lineItems).
-        where(["lineItems.book_id = ?", book.id]).
-        order("orders.checked_out_at DESC")
-  end
-
+  scope :in_progress, ->{ where("orders.orderstatus_id = 1") }
+  scope :placed, -> { where("orders.orderstatus_id = 2") }
+  scope :shipped, -> { where("orders.orderstatus_id = 3") }
+  scope :cancelled, -> { where("orders.orderstatus_id = 4") }
+  scope :completed, -> { where("orders.orderstatus_id = 5") }
+  
   def checkout!
-    self.checked_out_at = Time.now
+    self.checked_out_at = Time.zone.now
     self.save
     self.lineItems.each do |item|
       bookSold = item.book
@@ -28,7 +21,7 @@ class Order < ApplicationRecord
   end
 
   def recalculate_price!
-    self.total_price = lineItems.inject(0.0){|sum, lineItem| sum += lineItem.price * lineItem.quantity }
+    self.total_price = lineItems.inject(0.0){ |sum, lineItem| sum += lineItem.price * lineItem.quantity }
     if self.orderstatus_id.nil?
       self.orderstatus_id = 1
     end

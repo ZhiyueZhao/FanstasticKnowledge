@@ -6,9 +6,9 @@ class Book < ApplicationRecord
   has_many :lineItems
 
   validates :name, presence: true
-  validates_numericality_of :quantity_in_stock, :allow_nil => false, :greater_than_or_equal_to => 1
-  validates_numericality_of :pur_in_price, :allow_nil => false, :greater_than_or_equal_to => 0
-  validates_numericality_of :sell_price, :allow_nil => false, :greater_than_or_equal_to => 0.1
+  validates :quantity_in_stock, numericality: { only_integer: true, greater_than_or_equal_to: 0}, :allow_nil => false
+  validates :pur_in_price, numericality: {greater_than_or_equal_to: 0.1}, :allow_nil => false
+  validates :sell_price, numericality: {greater_than_or_equal_to: 0.1}, :allow_nil => false
 
   mount_uploader :image, ImageUploader
 
