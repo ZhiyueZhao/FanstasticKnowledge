@@ -19,6 +19,7 @@ html
           td 
             = form_for lineItem, :url => line_items_update_path(lineItem), :method => :post do |f|
               = f.number_field lineItem.id, :value => lineItem.quantity
+              = f.submit "Update Quantity"
           td = number_to_currency lineItem.price
           td = link_to "Remove", remove_from_cart_path(lineItem), :method => :post
       tr

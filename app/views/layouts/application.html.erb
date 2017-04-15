@@ -9,15 +9,16 @@
   </head>
 
   <body>
-    <% if user_signed_in? %>
-      <p>Hello, <%= current_user.first_name %> - <%= link_to "Sign Out", destroy_user_session_path, :method => 'delete' %> <%= link_to "All my orders", orders_path %> </p>
-    <% else %>
-      <%= link_to "Sign In", new_user_session_path %>
-    <% end %>
-    <%= link_to "Home", root_path %>
-    <%= link_to "About Us", aboutus_path %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+    <!--Navigation-->
+    <%= render partial: '/layouts/navbar' %>
+    <div class="container">
+      <% if user_signed_in? %>
+        <p>Hello, <%= current_user.first_name %> !
+      <% end %>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+      <%= yield %>
+    </div>
+    <%= render partial: '/layouts/footer' %>
   </body>
 </html>

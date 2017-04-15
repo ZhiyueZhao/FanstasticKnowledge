@@ -1,26 +1,83 @@
-doctype html
-html
-  head
-      h1 
-        = @book.name
-
-      = image_tag @book.image_url(:thumb)
-      #product-description
-        - if !@book.description.nil?
+/ doctype html
+/ html
+/   head
+/       h1 
+/         = @book.name
+/ 
+/       = image_tag @book.image_url(:thumb)
+/       #product-description
+/         - if !@book.description.nil?
+/           = @book.description
+/         - else
+/           p
+/             em No Description
+/               
+/         p 
+/           strong Status:
+/           = @book.status.name
+/         p
+/           strong Price:
+/           = number_to_currency @book.sell_price * (1-@book.status.des_percentage)
+/           = link_to "Add to Card", add_to_cart_path(@book.id)
+/         p
+/           strong By:
+/           = @book.authorBooks.first.author.full_name  
+/         p = link_to "Back to All Books", books_path
+/       div style="clear:both;" 
+.row
+  = render partial: 'side'
+  .col-md-9
+    .thumbnail
+      img.img-responsive alt="" src="http://placehold.it/800x300" /
+      .caption-full
+        h4.pull-right = number_to_currency @book.sell_price
+        h4
+          = @book.name
+        p
           = @book.description
-        - else
-          p
-            em No Description
-              
-        p 
-          strong Status:
-          = @book.status.name
+      .ratings
+        p.pull-right 3 reviews
         p
-          strong Price:
-          = number_to_currency @book.sell_price * (1-@book.status.des_percentage)
-          = link_to "Add to Card", add_to_cart_path(@book.id)
-        p
-          strong By:
-          = @book.authorBooks.first.author.full_name  
-        p = link_to "Back to All Books", books_path
-      div style="clear:both;" 
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star-empty
+          | 4.0 stars
+    .well
+      .text-right
+        =link_to "Add to Card", add_to_cart_path(@book.id), class: "btn btn-success"
+        a.btn.btn-success Leave a Review
+      hr/
+      .row
+        .col-md-12
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star-empty
+          | Anonymous
+          span.pull-right 10 days ago
+          p This product was great in terms of quality. I would definitely buy another!
+      hr/
+      .row
+        .col-md-12
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star-empty
+          | Anonymous
+          span.pull-right 12 days ago
+          p I've alredy ordered another one!
+      hr/
+      .row
+        .col-md-12
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star
+          span.glyphicon.glyphicon-star-empty
+          | Anonymous
+          span.pull-right 15 days ago
+          p I've seen some better than this, but not at this price. I definitely recommend this item.

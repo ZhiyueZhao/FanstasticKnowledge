@@ -1,28 +1,17 @@
-doctype html
-html
-  head
-  .books
-    .book
-      h4 
-        = book.name[0..30].gsub(/\s\w+\s*$/, '...')
-      - if book.image.present?
-        = link_to image_tag(book.image_url(:thumb)), book
-        
-      - if book.status.des_percentage > 0
+  .col-sm-4.col-lg-4.col-md-4
+    .thumbnail
+      = link_to image_tag(book.image_url(:thumb)), book
+      .caption
+        h4.pull-right =number_to_currency book.sell_price
+        h4
+          = link_to book.name[0..15].gsub(/\s\w+\s*$/, '...'), book
         p
-          strong Regular Price:
-          = number_to_currency book.sell_price
-          
-        p
-          strong 
-            = book.status.name
-          = number_to_currency (book.sell_price * (1 - book.status.des_percentage))
-      - else
-        p
-          strong Price:
-          = number_to_currency book.sell_price
-        
-      - if full_details
-        p = book.description
-      - else
-        p = link_to 'details', book
+          = book.description[0..50]
+        .ratings
+          p.pull-right 15 reviews
+          p
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
+              span.glyphicon.glyphicon-star
