@@ -6,7 +6,7 @@ html
       h4 
         = book.name[0..30].gsub(/\s\w+\s*$/, '...')
       - if book.image.present?
-        = link_to image_tag book.image_url(:thumb), {action: 'show', controller: 'booke_controller'}
+        = link_to image_tag(book.image_url(:thumb)), book
         
       - if book.status.des_percentage > 0
         p
