@@ -2,7 +2,7 @@
     .thumbnail
       = link_to image_tag(book.image_url(:thumb)), book
       .caption
-        h4.pull-right =number_to_currency book.sell_price
+        h4.pull-right =number_to_currency book.sell_price*(1-book.status.des_percentage)
         h4
           = link_to book.name[0..15].gsub(/\s\w+\s*$/, '...'), book
         p
