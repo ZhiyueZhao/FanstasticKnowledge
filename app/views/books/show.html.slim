@@ -4,7 +4,7 @@
     .thumbnail
       img.img-responsive alt="" src="http://placehold.it/800x300" /
       .caption-full
-        h4.pull-right = number_to_currency @book.sell_price
+        h4.pull-right = number_to_currency @book.sell_price * (1-@book.status.des_percentage)
         h4
           = @book.name
         p

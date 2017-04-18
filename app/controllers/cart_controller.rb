@@ -1,13 +1,13 @@
 class CartController < ApplicationController
   before_filter :find_cart
   before_action :authenticate_user!
-  
+
   def add
     @cart.save if @cart.new_record?
     session[:cart_id] = @cart.id
     book = Book.find(params[:id])
     LineItem.create! :order => @cart, :book => book, :price => book.sell_price, :quantity => 1
-    @cart.recalculate_price!
+    @cart.recalculate_price!(current_user.id)
     flash[:notice] = "Item added to cart!"
     @description = 'Description of Charge'
     redirect_to '/cart'
@@ -16,13 +16,13 @@ class CartController < ApplicationController
   def remove
     item = @cart.lineItems.find(params[:id])
     item.destroy
-    @cart.recalculate_price!
+    @cart.recalculate_price!(current_user.id)
     flash[:notice] = "Item removed from cart"
     redirect_to '/cart'
   end
 
   def checkout
-    amount = (@cart.total_price * (1+current_user.province.GST+current_user.province.HST+current_user.province.PST) * 100).to_i # $5 in cents
+    amount = (@cart.total_price * 100).to_i # $5 in cents
 
     @customer = Stripe::Customer.create(email:  params[:stripeEmail],
                                        source: params[:stripeToken])
@@ -55,7 +55,7 @@ class CartController < ApplicationController
     book_inStore = item.book.quantity_in_stock
     item.quantity = (params[:line_item][@st]).to_i>book_inStore ? book_inStore : params[:line_item][@st]#added this line here
     item.save
-    @cart.recalculate_price!
+    @cart.recalculate_price!(current_user.id)
     flash[:notice] = "Item updated!"
     redirect_to '/cart'
   end

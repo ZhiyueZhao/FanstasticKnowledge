@@ -20,32 +20,32 @@ html
             = form_for lineItem, :url => line_items_update_path(lineItem), :method => :post do |f|
               = f.number_field lineItem.id, :value => lineItem.quantity
               = f.submit "Update Quantity"
-          td = number_to_currency lineItem.price
+          td = number_to_currency lineItem.price * (1-lineItem.book.status.des_percentage)
           td = link_to "Remove", remove_from_cart_path(lineItem), :method => :post
       tr
-        td Total:
+        td Sub Total:
         td
-        td = number_to_currency @cart.total_price
+        td = number_to_currency @cart.sub_total
         
       - if current_user.province.GST != 0
         tr
           td GST:
           td
-          td = number_to_currency @cart.total_price * current_user.province.GST
+          td = number_to_currency @cart.gst
       - if current_user.province.PST != 0
         tr
           td PST:
           td
-          td = number_to_currency @cart.total_price * current_user.province.PST
+          td = number_to_currency @cart.pst
       - if current_user.province.HST != 0
         tr
           td HST:
           td
-          td = number_to_currency @cart.total_price * current_user.province.HST
+          td = number_to_currency @cart.hst
       tr
         td Sub Total:
         td
-        td = number_to_currency @cart.total_price * (1+current_user.province.GST+current_user.province.HST+current_user.province.PST)
+        td = number_to_currency @cart.total_price
     hr/
     = form_tag checkout_path, :style => "text-align: right" do |f|
       article
@@ -54,5 +54,5 @@ html
             p = flash[:error]
       = link_to "Continue Shopping", root_path
       or
-      script.stripe-button src="https://checkout.stripe.com/checkout.js" data-amount=(@cart.total_price* (1+current_user.province.GST+current_user.province.HST+current_user.province.PST)*100).to_i data-description=@description data-key=Rails.configuration.stripe[:publishable_key] data-locale="auto" 
+      script.stripe-button src="https://checkout.stripe.com/checkout.js" data-amount=(@cart.total_price*100).to_i data-description=@description data-key=Rails.configuration.stripe[:publishable_key] data-locale="auto" 
  
