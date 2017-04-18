@@ -40,14 +40,27 @@ menu :priority => 2
     end
   end
 
-  action_item :complete, only: :show do
-    link_to 'Complete Order', complete_admin_order_path(order), method: :put if order.orderstatus_id==2
+  action_item :ship, only: :show do
+    link_to 'Ship the Order', ship_admin_order_path(order), method: :put if order.orderstatus_id==Orderstatus.where("name = 'Placed'").first.id
   end
 
-  member_action :complete, method: :put do
+  member_action :ship, method: :put do
     order = Order.find(params[:id])
-    orderstatus = Orderstatus.where("name = 'Completed'").first.id
-    order.update(orderstatus_id: orderstatus)
+    orderstatus = Orderstatus.where("name = 'Shipped'").first.id
+    in_stock_flag = true
+    # check not in stock
+    order.lineItems.each do |item|
+      if item.book.quantity_in_stock < item.quantity
+        in_stock_flag = false
+      end
+    end
+    # process to ship the order
+    if in_stock_flag
+      order.update(orderstatus_id: orderstatus)
+      order.lineItems.each do |item|
+        item.book.quantity_in_stock -= item.quantity
+      end
+    end
     redirect_to admin_order_path(order)
   end
 #
