@@ -31,6 +31,7 @@ module FantasticKnowledge
     config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
+
+    config.assets.initialize_on_precompile = false
   end
 end
-config.assets.initialize_on_precompile = false
