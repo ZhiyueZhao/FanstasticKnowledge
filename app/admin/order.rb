@@ -2,10 +2,10 @@ ActiveAdmin.register Order do
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
 #
-permit_params :to_city, :to_address, :to_post_code, :shipping_fee, :user_id, :province_id, :orderstatus_id
+  permit_params :to_city, :to_address, :to_post_code, :shipping_fee, :user_id, :province_id, :orderstatus_id
 
-menu :priority => 2
-
+  menu :priority => 2
+  actions :index, :show
 
   filter :total_price
   filter :checked_out_at
@@ -58,7 +58,9 @@ menu :priority => 2
     if in_stock_flag
       order.update(orderstatus_id: orderstatus)
       order.lineItems.each do |item|
-        item.book.quantity_in_stock -= item.quantity
+        book = item.book
+        book.quantity_in_stock -= item.quantity
+        book.save
       end
     end
     redirect_to admin_order_path(order)
