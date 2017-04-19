@@ -8,7 +8,8 @@ ActiveAdmin.register Book do
 
   @types = Type.all
   @names = Array.new
-  if(@types.count>0 && @names.count>0)
+
+  if(@types.nil? && @names.count>0)
     @types.each do |type|
       @names << type.name
     end
@@ -19,6 +20,7 @@ ActiveAdmin.register Book do
       end
     end
   end
+
   preserve_default_filters!
   remove_filter :type, :authorBooks, :custReviews, :lineItems, :product_video, :description, :image, :created_at, :updated_at
 
