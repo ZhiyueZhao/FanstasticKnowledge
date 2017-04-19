@@ -8,3 +8,6 @@ document.addEventListener("turbolinks:load", ->
 
   if $('#order_wrapper').length == 0
     $('#order').dataTable())
+# jQuery ->
+#   $('#orders').dataTable()
+#   $('#order').dataTable()

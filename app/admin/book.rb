@@ -5,19 +5,20 @@ ActiveAdmin.register Book do
   menu :priority => 3
   permit_params :name, :description, :product_video, :pur_in_price, :quantity_in_stock, :sell_price, :type_id, :status_id, :image
   scope :all, :default => true
-  
+
   @types = Type.all
   @names = Array.new
-  @types.each do |type|
-    @names << type.name
-  end
+  if(@types.count>0 && @names.count>0)
+    @types.each do |type|
+      @names << type.name
+    end
 
-  @names.each do |name|
-    scope name do |books|
-      books.joins(:type).where('types.name = ?', name)
+    @names.each do |name|
+      scope name do |books|
+        books.joins(:type).where('types.name = ?', name)
+      end
     end
   end
-
   preserve_default_filters!
   remove_filter :type, :authorBooks, :custReviews, :lineItems, :product_video, :description, :image, :created_at, :updated_at
 
