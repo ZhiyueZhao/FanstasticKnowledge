@@ -72,6 +72,8 @@ gem 'rubocop'
 # css themes
 gem 'bootstrap-sass'
 
+gem 'jquery-datatables-rails', '~> 3.4.0'
+
 group :production do
   gem 'pg', '~> 0.18.4'
   gem 'rails_12factor'
