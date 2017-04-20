@@ -9,7 +9,7 @@ ActiveAdmin.register Book do
   @types = Type.all
   @names = Array.new
 
-  if(@types.nil? && @names.count>0)
+  if(!@types.nil?)
     @types.each do |type|
       @names << type.name
     end
