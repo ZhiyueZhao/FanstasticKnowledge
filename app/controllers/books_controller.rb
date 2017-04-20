@@ -8,7 +8,7 @@ class BooksController < ApplicationController
     @selected_status = params[:status]
 
 
-    @books = Book.search_by_name(params[:search]).search_by_type(params[:type])
+    @books = Book.joins(:type, :status).search_by_name(params[:search]).search_by_type(params[:type])
       .search_by_status(params[:status]).page(params[:page]).per(3)
 
   end

@@ -14,6 +14,6 @@ class Book < ApplicationRecord
 
 
   scope :search_by_name, lambda {|query|where(['"books"."name" LIKE ?', "%#{query}%"])}
-  scope :search_by_type, lambda {|query|where(['type LIKE ?', "%#{query}%"])}
-  scope :search_by_status, lambda {|query|where(['status LIKE ?', "%#{query}%"])}
+  scope :search_by_type, lambda {|query|where(['"types"."name" LIKE ?', "%#{query}%"])}
+  scope :search_by_status, lambda {|query|where(['"statuses"."name" LIKE ?', "%#{query}%"])}
 end
