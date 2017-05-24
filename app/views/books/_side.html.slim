@@ -3,4 +3,4 @@
     p.lead Fantastic Knowledge
     .list-group
       - @types.each do |type|
-        =link_to type.name, books_path(search: "", type: type.id, status: ""), class: "list-group-item"
+        =link_to type.name, books_path(search: "", type: type.name, status: ""), class: "list-group-item"
