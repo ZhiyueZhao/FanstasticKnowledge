@@ -16,8 +16,8 @@ module FantasticKnowledge
       :address                => 'smtp.gmail.com',
       :domain                 => 'mail.google.com',
       :port                   => 587,
-      :user_name              => 'george880131@gmail.com',
-      :password               => '881zZy211',
+      :user_name              => 'xxxxx@gmail.com',
+      :password               => 'xxxxxx',
       :authentication         => 'login',
       :enable_starttls_auto   => true
     }
